@@ -2,6 +2,7 @@
 
 namespace JohnRiveraGonzalez\Saml2Okta\Pages;
 
+use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -9,16 +10,17 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\File;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
+use UnitEnum;
 
 class Saml2DebugPage extends Page implements HasActions
 {
     use InteractsWithActions;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bug-ant';
+    protected static  string | BackedEnum | null  $navigationIcon = 'heroicon-o-bug-ant';
     protected static ?string $navigationLabel = 'Debug SAML2';
     protected static ?string $title = 'Debug y Logs SAML2';
     protected static ?string $slug = 'saml2-debug';
-    protected static ?string $navigationGroup = 'SAML2';
+    protected static string | UnitEnum | null $navigationGroup = 'SAML2';
     protected static ?int $navigationSort = 3;
 
     public ?array $logs = [];

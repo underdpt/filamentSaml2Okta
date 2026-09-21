@@ -2,6 +2,7 @@
 
 namespace JohnRiveraGonzalez\Saml2Okta\Pages;
 
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -18,20 +19,21 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
 use JohnRiveraGonzalez\Saml2Okta\Services\CertificateService;
+use UnitEnum;
 
 class Saml2OktaSettingsPage extends Page implements HasActions, HasForms
 {
     use InteractsWithForms, InteractsWithActions;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    protected static string $view = 'saml2-okta::settings';
+    protected string $view = 'saml2-okta::settings';
 
     protected static ?string $title = 'Configuración SAML2 Okta';
 
     protected static ?string $navigationLabel = 'Configuración SAML2';
 
-    protected static ?string $navigationGroup = 'SAML2';
+    protected static string | UnitEnum | null $navigationGroup = 'SAML2';
 
     protected static ?int $navigationSort = 1;
 

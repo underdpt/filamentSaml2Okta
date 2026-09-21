@@ -2,6 +2,7 @@
 
 namespace JohnRiveraGonzalez\Saml2Okta\Pages;
 
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -18,18 +19,19 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
 use JohnRiveraGonzalez\Saml2Okta\Services\SamlDebugService;
+use UnitEnum;
 
 class Saml2FieldMapperPage extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-arrows-right-left';
+    protected static  string | BackedEnum | null  $navigationIcon = 'heroicon-o-arrows-right-left';
     protected static ?string $navigationLabel = 'Mapeador de Campos';
     protected static ?string $title = 'Mapeador de Campos SAML2';
     protected static ?string $slug = 'saml2-field-mapper';
-    protected static ?string $navigationGroup = 'SAML2';
+    protected static string | UnitEnum | null $navigationGroup = 'SAML2';
     protected static ?int $navigationSort = 4;
-    protected static string $view = 'saml2-okta::field-mapper';
+    protected string $view = 'saml2-okta::field-mapper';
 
     public ?array $data = [];
     public ?array $fieldMappings = [];

@@ -2,6 +2,7 @@
 
 namespace JohnRiveraGonzalez\Saml2Okta\Pages;
 
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -14,18 +15,19 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use JohnRiveraGonzalez\Saml2Okta\Services\CertificateService;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
+use UnitEnum;
 
 class Saml2CertificatesPage extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    protected static  string | BackedEnum | null  $navigationIcon = 'heroicon-o-shield-check';
     protected static ?string $navigationLabel = 'Certificados SAML2';
     protected static ?string $title = 'Gestión de Certificados SAML2';
     protected static ?string $slug = 'saml2-certificates';
-    protected static ?string $navigationGroup = 'SAML2';
+    protected static string | UnitEnum | null $navigationGroup = 'SAML2';
     protected static ?int $navigationSort = 2;
-    protected static string $view = 'saml2-okta::certificates';
+    protected string $view = 'saml2-okta::certificates';
 
     public ?array $data = [];
     public ?string $domain = null;
