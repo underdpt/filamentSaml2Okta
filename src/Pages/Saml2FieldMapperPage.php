@@ -18,6 +18,7 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
+use JohnRiveraGonzalez\Saml2Okta\Saml2OktaPlugin;
 use JohnRiveraGonzalez\Saml2Okta\Services\SamlDebugService;
 use UnitEnum;
 
@@ -378,8 +379,10 @@ class Saml2FieldMapperPage extends Page implements HasForms
 
     public static function canAccess(): bool
     {
-        // Permitir acceso solo a super_admin, pero ocultar del menú
-        return auth()->user()?->hasRole('super_admin') ?? false;
+        $plugin = filament('saml2-okta');
+        assert($plugin instanceof Saml2OktaPlugin);
+
+        return $plugin->authorize();
     }
     
     public static function shouldRegisterNavigation(): bool

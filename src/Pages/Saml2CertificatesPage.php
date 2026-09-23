@@ -13,6 +13,7 @@ use Filament\Pages\Page;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use JohnRiveraGonzalez\Saml2Okta\Saml2OktaPlugin;
 use JohnRiveraGonzalez\Saml2Okta\Services\CertificateService;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
 use UnitEnum;
@@ -395,8 +396,10 @@ class Saml2CertificatesPage extends Page implements HasForms
 
     public static function canAccess(): bool
     {
-        // Permitir acceso solo a super_admin, pero ocultar del menú
-        return auth()->user()?->hasRole('super_admin') ?? false;
+        $plugin = filament('saml2-okta');
+        assert($plugin instanceof Saml2OktaPlugin);
+        
+        return $plugin->authorize();
     }
     
     public static function shouldRegisterNavigation(): bool
