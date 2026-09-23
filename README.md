@@ -95,6 +95,21 @@ php artisan vendor:publish --tag="saml2-okta-translations"
 php artisan vendor:publish --tag="saml2-okta-config"
 ```
 
+### 6. Plugin configuration
+
+#### 6.1. Authorization
+
+You can add a callback to implement custom authorization to be used on every plugin page:
+
+```php
+
+use JohnRiveraGonzalez\Saml2Okta\Pages\Saml2OktaSettingsPage;
+use JohnRiveraGonzalez\Saml2Okta\Saml2OktaPlugin;
+
+Saml2OktaPlugin::make()
+    ->authorizeAccessUsing(fn () => auth()->user()?->hasRole('super_admin') ?? false);
+```
+
 ---
 
 ## Configuration
