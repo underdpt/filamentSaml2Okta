@@ -17,6 +17,7 @@ use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
+use JohnRiveraGonzalez\Saml2Okta\Saml2OktaPlugin;
 use JohnRiveraGonzalez\Saml2Okta\Services\CertificateService;
 
 class Saml2OktaSettingsPage extends Page implements HasActions, HasForms
@@ -39,7 +40,10 @@ class Saml2OktaSettingsPage extends Page implements HasActions, HasForms
 
     public static function canAccess(): bool
     {
-        return auth()->user()?->hasRole('super_admin') ?? false;
+        $plugin = filament('saml2-okta');
+        assert($plugin instanceof Saml2OktaPlugin);
+
+        return $plugin->authorize();
     }
 
     public ?array $data = [];

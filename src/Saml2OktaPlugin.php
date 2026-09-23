@@ -2,6 +2,7 @@
 
 namespace JohnRiveraGonzalez\Saml2Okta;
 
+use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use JohnRiveraGonzalez\Saml2Okta\Models\Saml2OktaConfig;
@@ -12,6 +13,8 @@ use JohnRiveraGonzalez\Saml2Okta\Pages\Saml2OktaSettingsPage;
 
 class Saml2OktaPlugin implements Plugin
 {
+    protected ?Closure $authorizeAccessUsing = null;
+    
     public static function make(): static
     {
         return app(static::class);
@@ -52,5 +55,17 @@ class Saml2OktaPlugin implements Plugin
                 'loginUrl' => route('saml2.login'),
             ]);
         });
+    }
+
+    public function authorizeAccessUsing(Closure $callback): static
+    {
+        $this->authorizeAccessUsing = $callback;
+        
+        return $this;
+    }
+
+    public function authorize(): bool
+    {
+        return $this->authorizeAccessUsing ? ($this->authorizeAccessUsing)() : false;
     }
 }
